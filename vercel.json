@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/api/public/ai-proxy", "destination": "/api/ai-proxy" }
+  ]
+}
