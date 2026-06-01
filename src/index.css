@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Cyber neon dark theme — single mode */
+    --background: 240 30% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 25% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 30% 6%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 270 95% 65%;
+    --primary-foreground: 240 30% 4%;
+    --primary-glow: 285 100% 70%;
+
+    --secondary: 190 100% 55%;
+    --secondary-foreground: 240 30% 4%;
+
+    --muted: 240 20% 12%;
+    --muted-foreground: 240 10% 65%;
+
+    --accent: 190 100% 55%;
+    --accent-foreground: 240 30% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 25% 18%;
+    --input: 240 25% 14%;
+    --ring: 270 95% 65%;
+
+    --radius: 0.85rem;
+
+    --gradient-primary: linear-gradient(135deg, hsl(270 95% 65%), hsl(190 100% 55%));
+    --gradient-aurora: linear-gradient(135deg, hsl(270 95% 65% / 0.8), hsl(320 90% 65% / 0.6), hsl(190 100% 55% / 0.7));
+    --gradient-bg: radial-gradient(ellipse at top left, hsl(270 80% 20% / 0.5), transparent 60%), radial-gradient(ellipse at bottom right, hsl(190 80% 20% / 0.4), transparent 60%);
+    --shadow-glow: 0 0 40px hsl(270 95% 65% / 0.35);
+    --shadow-cyan: 0 0 30px hsl(190 100% 55% / 0.35);
+    --shadow-elegant: 0 20px 60px -15px hsl(270 95% 65% / 0.4);
+    --transition-smooth: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 240 30% 4%;
+    --foreground: 210 40% 98%;
+    --card: 240 25% 7%;
+    --card-foreground: 210 40% 98%;
+    --popover: 240 30% 6%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 270 95% 65%;
+    --primary-foreground: 240 30% 4%;
+    --secondary: 190 100% 55%;
+    --secondary-foreground: 240 30% 4%;
+    --muted: 240 20% 12%;
+    --muted-foreground: 240 10% 65%;
+    --accent: 190 100% 55%;
+    --accent-foreground: 240 30% 4%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 240 25% 18%;
+    --input: 240 25% 14%;
+    --ring: 270 95% 65%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    background-image: var(--gradient-bg);
+    background-attachment: fixed;
+    font-feature-settings: "ss01", "cv01";
+  }
+
+  /* iOS Safari 兼容：修复弹性滚动 */
+  @supports (-webkit-touch-callout: none) {
+    .glass,
+    [data-radix-popper-content-wrapper] {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid hsl(var(--border) / 0.6);
+  }
+  .text-gradient {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glow-primary { box-shadow: var(--shadow-glow); }
+  .glow-cyan { box-shadow: var(--shadow-cyan); }
+  .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+  .scrollbar-thin::-webkit-scrollbar-thumb { background: hsl(var(--primary) / 0.4); border-radius: 99px; }
+  .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+  /* iOS Safari 滚动修复：弹性滚动 + 防止滚动穿透 */
+  .ios-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+}
+
+@keyframes float-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -30px) scale(1.1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary) / 0.4); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary) / 0.8); }
+}
+.animate-float-orb { animation: float-orb 12s ease-in-out infinite; }
+.animate-shimmer { background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.2), transparent); background-size: 200% 100%; animation: shimmer 2s infinite; }
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+
+/* Diffusion loading: blurred noisy dots gradually resolve */
+@keyframes diffusion-dot {
+  0% {
+    filter: blur(14px);
+    opacity: 0.15;
+    transform: translate(var(--dx, 0), var(--dy, 0)) scale(0.6);
+  }
+  50% {
+    filter: blur(8px);
+    opacity: 0.55;
+    transform: translate(calc(var(--dx, 0) * 0.4), calc(var(--dy, 0) * 0.4)) scale(0.85);
+  }
+  100% {
+    filter: blur(2px);
+    opacity: 0.9;
+    transform: translate(0, 0) scale(1);
+  }
+}
+@keyframes diffusion-fade {
+  0% { opacity: 0.85; filter: blur(0); }
+  100% { opacity: 0; filter: blur(6px); }
+}
+.diffusion-stage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.diffusion-stage .dot {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 30% 30%, hsl(var(--primary-glow)), hsl(var(--primary)) 45%, hsl(var(--secondary)) 90%);
+  mix-blend-mode: screen;
+  animation: diffusion-dot 2.8s cubic-bezier(0.22, 0.61, 0.36, 1) infinite alternate;
+}
+@keyframes image-reveal {
+  0% { filter: blur(24px) saturate(1.4); opacity: 0; transform: scale(1.04); }
+  60% { filter: blur(8px) saturate(1.2); opacity: 1; transform: scale(1.01); }
+  100% { filter: blur(0) saturate(1); opacity: 1; transform: scale(1); }
+}
+.animate-image-reveal { animation: image-reveal 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
